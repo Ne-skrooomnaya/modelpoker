@@ -1,0 +1,5 @@
+version: 1
+type: node
+node:
+  module: model/main.js  # Путь к вашему JavaScript-файлу с приложением
+  node_version: 16 # или другая поддерживаемая версия

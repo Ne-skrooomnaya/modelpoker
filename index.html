@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telegram Mini App Example</title>
+  <!-- Подключаем Telegram Web App API -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    body { font-family: sans-serif; }
+  </style>
+</head>
+<body>
+  <h1>Привет из Node.js (Express)!</h1>
+  <p id="message">Загрузка сообщения с сервера...</p>
+  <script>
+    // Получаем сообщение с сервера
+    fetch('/api/message') //  Используем относительный путь к API
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('message').textContent = data;
+      })
+      .catch(error => {
+        console.error('Ошибка получения данных:', error);
+        document.getElementById('message').textContent = 'Ошибка загрузки сообщения.';
+      });
+
+    // Telegram Web App initialization (если нужно)
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+  </script>
+</body>
+</html>

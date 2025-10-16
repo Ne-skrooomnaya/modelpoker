@@ -1,8 +1,10 @@
-console.log("Приложение запускается...");
-const express = require('express');
-console.log("Express подключен...");
-const path = require('path');
-const TelegramBot = require('node-telegram-bot-api'); // Добавляем Telegram Bot API
+    require('dotenv').config(); // <-- Добавьте эту строку
+    
+    console.log("Приложение запускается...");
+    const express = require('express');
+    console.log("Express подключен...");
+    const path = require('path');
+    const TelegramBot = require('node-telegram-bot-api');
 
 const app = express();
 const port = process.env.PORT || 8080; // Используем переменную окружения PORT

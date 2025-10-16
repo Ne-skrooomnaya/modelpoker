@@ -1,40 +1,58 @@
 require('dotenv').config();
 
-console.log("Приложение запускается...");
+console.log("Приложение запускается..."); // Это должно быть первым, что мы увидим
 const express = require('express');
 console.log("Express подключен...");
 const path = require('path');
 const TelegramBot = require('node-telegram-bot-api');
+console.log("TelegramBot API подключен."); // Новая строка лога
 
 const app = express();
-const port = process.env.PORT || 8080; // Используем переменную окружения PORT
+const port = process.env.PORT || 8080;
+console.log(`Порт установлен: ${port}`); // Новая строка лога
 
-const token = process.env.TELEGRAM_BOT_TOKEN; // Токен из переменной окружения
+const token = process.env.TELEGRAM_BOT_TOKEN;
 if (!token) {
   console.error("Токен Telegram Bot не найден в переменных окружения! Бот не будет работать с Telegram.");
-  // process.exit(1); // Завершаем процесс, если токен не найден
 } else {
-  console.log("Токен Telegram Bot успешно получен.");
+  console.log("Токен Telegram Bot успешно получен (длина: " + token.length + ")."); // Новая строка лога, показывающая, что токен не пустой
+}
+
+// Потенциальная точка отказа: создание экземпляра бота с пустым токеном
+// Если токен пуст, то new TelegramBot(undefined) может вызвать ошибку.
+// Обернем это в try-catch
+let bot;
+try {
+  bot = new TelegramBot(token); // <-- Если token === undefined, это может быть проблемой
+  console.log("Экземпляр TelegramBot создан."); // Новая строка лога
+} catch (error) {
+  console.error("Ошибка при создании экземпляра TelegramBot:", error);
+  // Здесь можно было бы сделать process.exit(1), но пока оставим без него,
+  // чтобы Express все равно попытался запуститься.
 }
 
 
-const bot = new TelegramBot(token);
+// Устанавливаем вебхук - ЭТО ТОЖЕ МОЖЕТ БЫТЬ ПРОБЛЕМОЙ, если бот не инициализирован
+// Нужно проверять, что bot существует, прежде чем вызывать setWebHook
+if (bot) { // Добавляем проверку на существование bot
+  const webhookUrl = `https://model-linfaiz.amvera.io/webhook`;
+  bot.setWebHook(webhookUrl)
+    .then(() => {
+      console.log("Вебхук установлен:", webhookUrl);
+    })
+    .catch((error) => {
+      console.error("Ошибка при установке вебхука:", error);
+    });
+} else {
+  console.warn("Бот не инициализирован, вебхук не будет установлен.");
+}
 
-// Устанавливаем вебхук
-// ИСПРАВЛЕНИЕ 1: URL вебхука должен включать путь /webhook
-const webhookUrl = `https://model-linfaiz.amvera.io/webhook`; // Замените на URL вашего приложения Amvera
-bot.setWebHook(webhookUrl)
-  .then(() => {
-    console.log("Вебхук установлен:", webhookUrl);
-  })
-  .catch((error) => {
-    console.error("Ошибка при установке вебхука:", error);
-  });
 
-app.use(express.json()); // Добавляем middleware для разбора JSON
+app.use(express.json());
+console.log("Middleware для JSON настроен."); // Новая строка лога
 
 app.use(express.static(__dirname));
-console.log("Статические файлы настроены...");
+console.log("Статические файлы настроены.");
 
 app.get('/', (req, res) => {
   console.log("Получен запрос на /");
@@ -47,34 +65,41 @@ app.get('/api/message', (req, res) => {
 });
 
 // Обработчик вебхука от Telegram
-app.post('/webhook', (req, res) => {
-  try {
-    bot.processUpdate(req.body);
-    res.sendStatus(200); // Отправляем OK
-  } catch (error) {
-    console.error("Ошибка при обработке вебхука:", error);
-    res.sendStatus(500); // Отправляем ошибку
-  }
-});
+if (bot) { // Добавляем проверку на существование bot
+  app.post('/webhook', (req, res) => {
+    try {
+      bot.processUpdate(req.body);
+      res.sendStatus(200);
+    } catch (error) {
+      console.error("Ошибка при обработке вебхука:", error);
+      res.sendStatus(500);
+    }
+  });
+} else {
+  console.warn("Бот не инициализирован, обработчик вебхуков не будет работать.");
+}
+
 
 // Обработчик сообщений от Telegram (внутри express)
-bot.on('message', (msg) => {
-  try {
-    const chatId = msg.chat.id;
-    // ИСПРАВЛЕНИЕ 2: Использование обратных кавычек (`) для интерполяции строк
-    console.log(`Получено сообщение от ${chatId}: ${msg.text}`);
-    bot.sendMessage(chatId, 'Привет от бота!');
-  } catch (error) {
-    console.error("Ошибка при отправке сообщения:", error);
-  }
-});
+if (bot) { // Добавляем проверку на существование bot
+  bot.on('message', (msg) => {
+    try {
+      const chatId = msg.chat.id;
+      console.log(`Получено сообщение от ${chatId}: ${msg.text}`);
+      bot.sendMessage(chatId, 'Привет от бота!');
+    } catch (error) {
+      console.error("Ошибка при отправке сообщения:", error);
+    }
+  });
+} else {
+  console.warn("Бот не инициализирован, обработчик сообщений не будет работать.");
+}
+
 
 app.listen(port, () => {
-  // ИСПРАВЛЕНИЕ 3: Использование обратных кавычек (`) для интерполяции строк
   console.log(`Сервер слушает на порту ${port}`);
 });
 
-// Обработка ошибок (важно для стабильности)
 process.on('uncaughtException', (err) => {
   console.error("Неперехваченное исключение:", err);
 });

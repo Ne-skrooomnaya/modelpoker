@@ -1,12 +1,16 @@
-    {
-      "name": "telegram-mini-app",
+{
+      "name": "modelpoker",
       "version": "1.0.0",
-      "description": "Telegram Mini App example with Node.js backend",
+      "description": "",
       "main": "main.js",
       "scripts": {
-        "start": "node main.js"
+            "start": "node main.js"
       },
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
       "dependencies": {
-        "express": "^4.17.1"  
+            "express": "^5.1.0",
+            "node-telegram-bot-api": "^0.64.0"
       }
-    }
+}

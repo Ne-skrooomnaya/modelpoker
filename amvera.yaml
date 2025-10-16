@@ -1,7 +1,6 @@
-    version: 1
-    type: node
-    node:
-      module: main.js
-      node_version: 16  # или 18, 20
-      port: 8080
+# amvera.yaml
+project_type: node
+node_version: 18  # Укажите нужную версию Node.js
+install_command: npm install
+start_command: node main.js  # Укажите правильный скрипт запуска вашего бота
 

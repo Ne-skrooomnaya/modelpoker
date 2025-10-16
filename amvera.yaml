@@ -1,11 +1,13 @@
-meta:
+ version: 1
+ meta:
   environment: node
   toolchain:
     name: browser
     version: 18
-build:
+ build:
   - npm install 
 
 
-run:
+ run:
+ - sleep 30
   - npm start 

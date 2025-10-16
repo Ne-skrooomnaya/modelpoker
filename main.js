@@ -9,7 +9,8 @@
     app.use(express.static(path.join(__dirname, 'web-app')));
 
     // Главный маршрут, который Amvera, скорее всего, проверяет
-    app.get('/', (req, res) => {
+            app.get('/', (req, res) => {
+            console.log('Received health check request on /');
         res.status(200).send('Hello from Amvera Express server! All good.');
     });
 

@@ -44,7 +44,7 @@ bot.onText(/\/start/, (msg) => {
     // Пример: https://modelpoker-abcd12.amvera.ru/
     // Amvera автоматически предоставит тебе такой URL после деплоя.
     // Пока можешь использовать заглушку, но для работы нужно будет обновить.
-    const webAppUrl = process.env.WEB_APP_URL || `https://your-project-name.amvera.ru/`; // Замени на свой URL
+    const webAppUrl = process.env.WEB_APP_URL || `https://model-linfaiz.amvera.io/`; // Замени на свой URL
 
     bot.sendMessage(chatId, `Привет, ${userName}! Выбери действие:`, {
         reply_markup: {

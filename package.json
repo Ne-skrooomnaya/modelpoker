@@ -1,12 +1,12 @@
-{
-  "name": "telegram-mini-app",
-  "version": "1.0.0",
-  "description": "Telegram Mini App example with Node.js backend",
-  "main": "main.js",
-  "scripts": {
-    "start": "node main.js"
-  },
-  "dependencies": {
-    "express": "^4.17.1"  
-  }
-}
+    {
+      "name": "telegram-mini-app",
+      "version": "1.0.0",
+      "description": "Telegram Mini App example with Node.js backend",
+      "main": "main.js",
+      "scripts": {
+        "start": "node main.js"
+      },
+      "dependencies": {
+        "express": "^4.17.1"  
+      }
+    }

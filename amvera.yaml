@@ -1,6 +1,6 @@
 # amvera.yaml
 project_type: node
-node_version: 18  # Укажите нужную версию Node.js
+node_version: 16  
 install_command: npm install
-start_command: node main.js  # Укажите правильный скрипт запуска вашего бота
+start_command: node main.js  
 

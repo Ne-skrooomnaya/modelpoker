@@ -13,6 +13,7 @@ if (!token) {
   process.exit(1); // Завершаем процесс, если токен не найден
 }
 
+
 const bot = new TelegramBot(token);
 
 // Устанавливаем вебхук

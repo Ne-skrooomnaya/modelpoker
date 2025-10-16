@@ -1,0 +1,6 @@
+# amvera.yaml
+project_type: node
+node_version: 18 # Попробуем версию 18
+install_command: npm install # Будет выполняться, но зависимостей нет, так что быстро
+start_command: node main.js
+

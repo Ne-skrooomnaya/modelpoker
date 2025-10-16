@@ -1,7 +1,7 @@
 const express = require('express');
-const path = require('path');  // Для работы с путями к файлам
+const path = require('path');
 const app = express();
-const port = 8080;  // Amvera требует порт 8080
+const port = 8080;  // ***Важно: Укажите порт 8080***
 
 // Отдаем статические файлы из текущей директории (model)
 app.use(express.static(__dirname));

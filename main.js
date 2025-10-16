@@ -2,19 +2,15 @@
     const path = require('path');
 
     const app = express();
-    // Amvera инжектирует PORT. Убедись, что он используется.
     const PORT = process.env.PORT || 8080;
 
-    // Раздаем статику из папки 'web-app'
     app.use(express.static(path.join(__dirname, 'web-app')));
 
-    // Главный маршрут, который Amvera, скорее всего, проверяет
-            app.get('/', (req, res) => {
-            console.log('Received health check request on /');
+    app.get('/', (req, res) => {
+        console.log('--- Received request on / (Health Check) ---'); // <--- ДОБАВЬ ЭТУ СТРОКУ
         res.status(200).send('Hello from Amvera Express server! All good.');
     });
 
-    // Маршрут для теста Web App
     app.get('/test-webapp', (req, res) => {
         res.sendFile(path.join(__dirname, 'web-app', 'index.html'));
     });

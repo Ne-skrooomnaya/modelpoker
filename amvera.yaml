@@ -9,5 +9,5 @@
 
 
  run:
- - sleep 30
+ - sleep 15
   - npm start 

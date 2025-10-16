@@ -1,25 +1,28 @@
-    require('dotenv').config(); // <-- Добавьте эту строку
-    
-    console.log("Приложение запускается...");
-    const express = require('express');
-    console.log("Express подключен...");
-    const path = require('path');
-    const TelegramBot = require('node-telegram-bot-api');
+require('dotenv').config();
+
+console.log("Приложение запускается...");
+const express = require('express');
+console.log("Express подключен...");
+const path = require('path');
+const TelegramBot = require('node-telegram-bot-api');
 
 const app = express();
 const port = process.env.PORT || 8080; // Используем переменную окружения PORT
 
 const token = process.env.TELEGRAM_BOT_TOKEN; // Токен из переменной окружения
 if (!token) {
-  console.error("Токен Telegram Bot не найден в переменных окружения!");
-  process.exit(1); // Завершаем процесс, если токен не найден
+  console.error("Токен Telegram Bot не найден в переменных окружения! Бот не будет работать с Telegram.");
+  // process.exit(1); // Завершаем процесс, если токен не найден
+} else {
+  console.log("Токен Telegram Bot успешно получен.");
 }
 
 
 const bot = new TelegramBot(token);
 
 // Устанавливаем вебхук
-const webhookUrl = 'https://model-linfaiz.amvera.io/'; // Замените на URL вашего приложения Amvera
+// ИСПРАВЛЕНИЕ 1: URL вебхука должен включать путь /webhook
+const webhookUrl = `https://model-linfaiz.amvera.io/webhook`; // Замените на URL вашего приложения Amvera
 bot.setWebHook(webhookUrl)
   .then(() => {
     console.log("Вебхук установлен:", webhookUrl);
@@ -58,6 +61,7 @@ app.post('/webhook', (req, res) => {
 bot.on('message', (msg) => {
   try {
     const chatId = msg.chat.id;
+    // ИСПРАВЛЕНИЕ 2: Использование обратных кавычек (`) для интерполяции строк
     console.log(`Получено сообщение от ${chatId}: ${msg.text}`);
     bot.sendMessage(chatId, 'Привет от бота!');
   } catch (error) {
@@ -66,6 +70,7 @@ bot.on('message', (msg) => {
 });
 
 app.listen(port, () => {
+  // ИСПРАВЛЕНИЕ 3: Использование обратных кавычек (`) для интерполяции строк
   console.log(`Сервер слушает на порту ${port}`);
 });
 

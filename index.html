@@ -50,7 +50,7 @@
             display: none;
             text-align: center;
         }
-        
+
         input {
             outline: none;
             border-radius: 5px;
@@ -61,21 +61,22 @@
             color: var(--tg-theme-text-color);
             transition: all .2s;
         }
-        
+
         input:focus {
             border-color: var(--tg-theme-secondary-bg-color)
         }
-        
+
     </style>
 </head>
 <body>
     <div class="Main">
         <h1>Тестовое приложение</h1>
-        <img src="{{ url_for('static', filename='bot.png') }}" alt="">
+        <!-- ИСПРАВЛЕНИЕ 4: Путь к изображению. Предполагается, что bot.png находится в корне проекта. -->
+        <img src="bot.png" alt="">
         <p></p>
         <button class="btn f-btn">Тест отправки данных</button>
     </div>
-    <form class="test-form">    
+    <form class="test-form">
         <input type="text" placeholder="Введите заголовок" class="title-inp">
         <input type="text" placeholder="Введите описание" class="desc-inp">
         <input type="text" placeholder="Введите текст" class="text-inp">

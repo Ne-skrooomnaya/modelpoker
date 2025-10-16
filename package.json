@@ -1,14 +1,18 @@
 {
-  "name": "modelpoker",
+  "name": "modelpoker-tg-bot",
   "version": "1.0.0",
-  "description": "Minimal Node.js app for Amvera testing",
+  "description": "Мой очень простой Telegram бот для Amvera.ru",
   "main": "main.js",
   "scripts": {
     "start": "node main.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Твое Имя",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "node-telegram-bot-api": "^0.61.0"
+  },
+  "engines": {
+    "node": "18"
+  }
 }
-

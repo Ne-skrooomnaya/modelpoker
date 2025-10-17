@@ -4,17 +4,18 @@ const fs = require('fs');
 
 const app = express();
 
-// Исправление 1: Добавлен оператор присваивания = для PORT
-const PORT = process.env.PORT || 8080; // Используем process.env.PORT, если он определен, иначе 8080
+const PORT = process.env.PORT || 8080;
 
 // Статическая папка 'web-app' находится на один уровень выше серверного main.js
+// Этот middleware будет обрабатывать запросы к '/' и другим файлам в 'web-app'
 app.use(express.static(path.join(__dirname, '..', 'web-app')));
 
-// Главный роут для проверки работоспособности сервера (будет перекрыт express.static для '/')
-app.get('/', (req, res) => {
-    console.log('--- Received request on / (Health Check) ---');
-    res.status(200).send('Hello from Express server! All good.');
-});
+// >>>>> УДАЛИТЕ ЭТОТ РОУТ <<<<<
+// app.get('/', (req, res) => {
+//     console.log('--- Received request on / (Health Check) ---');
+//     res.status(200).send('Hello from Express server! All good.');
+// });
+// >>>>> УДАЛИТЕ ЭТОТ РОУТ <<<<<
 
 // Роут для локального тестирования вашего мини-приложения
 app.get('/test-webapp', (req, res) => {
@@ -26,12 +27,8 @@ app.get('/test-webapp', (req, res) => {
             return res.status(500).send('Error loading web app for testing.');
         }
 
-        // Используем многострочную строку с обратными кавычками ``
         const mockWebAppScript = `
             <script>
-                // Исправление 2: Добавлен `||` (логическое ИЛИ) или `&&` (логическое И) в условие,
-                // а также скобки для обеспечения правильного порядка операций.
-                // Предполагаем, что проверка должна быть, если Telegram отсутствует ИЛИ WebApp отсутствует.
                 if (typeof Telegram === 'undefined' || !Telegram.WebApp) {
                     window.Telegram = {
                         WebApp: {
@@ -62,16 +59,10 @@ app.get('/test-webapp', (req, res) => {
                     console.warn('Telegram.WebApp API is MOCKED for local testing!');
                 }
             </script>
-        `; // <-- Закрывающая обратная кавычка для mockWebAppScript
+        `;
 
-        // Исправление 3: Добавлены обратные кавычки `` для всей шаблонной строки
-        // и правильное встраивание mockWebAppScript.
-        // Также исправлен синтаксис `<body>n${mockWebAppScript}` на `<body>${mockWebAppScript}`
         const modifiedHtml = htmlData.replace('<body>', `<body>${mockWebAppScript}`);
-
-        // Эта строка добавлена для отладки, чтобы увидеть, читается ли файл
         console.log(`Sending modified HTML from: ${indexPath}`);
-
         res.send(modifiedHtml);
     });
 });

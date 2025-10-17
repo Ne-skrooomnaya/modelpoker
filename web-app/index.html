@@ -5,54 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мое Poker Mini App</title>
     <style>
+        /* Общие стили */
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #301934; /* Темно-фиолетовый фон */
+            color: white; /* Белый текст для контраста */
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: var(--tg-theme-bg-color); /* Используем цвета темы Telegram */
-            color: var(--tg-theme-text-color);
+            align-items: center; /* Центрируем элементы по горизонтали */
+            min-height: 100vh; /* Занимаем всю высоту экрана */
         }
-        h1 {
-            color: var(--tg-theme-text-color);
-        }
-        input[type="number"] {
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid var(--tg-theme-hint-color);
-            border-radius: 5px;
-            width: 80%;
-            max-width: 300px;
-            background-color: var(--tg-theme-secondary-bg-color);
-            color: var(--tg-theme-text-color);
-        }
+
         button {
-            background-color: var(--tg-theme-button-color);
-            color: var(--tg-theme-button-text-color);
+            background-color: #9F79EE; /* Светло-фиолетовый для кнопок */
+            color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 1em;
-            margin-top: 10px;
+            margin: 5px; /* Отступы между кнопками */
         }
-        button:active {
-            opacity: 0.8;
+
+        button:hover {
+            background-color: #7B5CB5; /* Более темный оттенок при наведении */
         }
+
+        /* Стили для блоков */
+        .logo-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo-container img {
+            max-width: 150px; /* Или другой подходящий размер */
+            height: auto;
+        }
+
+        .top-section {
+            background-color: #9F79EE; /* Светло-фиолетовый фон */
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            width: 90%; /* Занимает 90% ширины экрана */
+            max-width: 600px; /* Максимальная ширина */
+            display: flex;
+            align-items: center; /* Выравнивание по вертикали */
+            justify-content: space-between; /* Распределяем пространство между элементами */
+        }
+
+        .top-section img {
+            max-width: 100px; /* Размер картинки слева */
+            height: auto;
+            margin-right: 20px;
+            border-radius: 5px;
+        }
+
+        .top-buttons {
+            display: flex;
+            flex-direction: column; /* Кнопки в столбик */
+        }
+
+        .bottom-section {
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            display: flex;
+            justify-content: space-around; /* Равномерное распределение кнопок */
+        }
+
+        /* Дополнительные стили для телеграм-мини-приложения */
+        :root {
+          --tg-viewport-height: 100vh;
+        }
+
+        body {
+          height: var(--tg-viewport-height);
+        }
+
     </style>
 </head>
 <body>
-    <h1>Мини-приложение для покера</h1>
-    <p>Выбери размер ставки:</p>
-    <input type="number" id="betInput" value="10" min="1">
-    <button id="sendBetButton">Сделать ставку</button>
+
+    <!-- Логотип -->
+    <div class="logo-container">
+        <img src="logo.png" alt="Poker Logo"> <!-- Замените на путь к вашему логотипу -->
+    </div>
+
+    <!-- Верхний блок с картинкой и кнопками -->
+    <div class="top-section">
+        <img src="poker_chip.png" alt="Poker Chip"> <!-- Замените на путь к вашей картинке -->
+        <div class="top-buttons">
+            <button onclick="location.href='rating.html'">Рейтинг</button>
+            <button onclick="location.href='race.html'">Гонка месяца</button>
+            <button onclick="location.href='past_games.html'">Прошедшие игры</button>
+        </div>
+    </div>
+
+    <!-- Нижний блок с кнопками -->
+    <div class="bottom-section">
+        <button onclick="location.href='menu.html'">Меню</button>
+        <button onclick="location.href='tea.html'">Чайная карта</button>
+        <button onclick="location.href='parkour.html'">Паркур</button>
+        <button onclick="location.href='bar_map.html'">Карта бара</button>
+    </div>
 
     <!-- Подключаем официальный скрипт Telegram Web App API -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <!-- Подключаем наш скрипт -->
-    <script src="script.js"></script>
+    <script src="script.js"></script> <!-- Убедитесь, что имя файла совпадает! -->
 </body>
 </html>

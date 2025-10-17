@@ -9,22 +9,32 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            background-color: #301934; /* Темно-фиолетовый фон */
+            padding: 0;
+            background-color: #211623; /* Темно-фиолетовый фон */
             color: white; /* Белый текст для контраста */
             display: flex;
+            padding-left: 15px;
+            padding-right: 15px;
             flex-direction: column;
             align-items: center; /* Центрируем элементы по горизонтали */
             min-height: 100vh; /* Занимаем всю высоту экрана */
         }
 
         button {
-            background-color: #9F79EE; /* Светло-фиолетовый для кнопок */
+            background-color: #221A23; /* Светло-фиолетовый для кнопок */
+            box-shadow:
+    /* Нижняя тень для глубины (темнее, дальше) */
+    20px 6px 12px rgba(0, 0, 0, 0.15),
+    /* Верхний светлый блик (светлее, ближе, внутри) */
+    inset 0 2px 0px rgba(255, 255, 255, 0.6);
+            border: 5px solid #ae96b2;
             color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 1em;
+            text-align: left;
             margin: 5px; /* Отступы между кнопками */
         }
 
@@ -44,35 +54,84 @@
         }
 
         .top-section {
-            background-color: #9F79EE; /* Светло-фиолетовый фон */
+            background-color: #2E2031; /* Светло-фиолетовый фон */
             padding: 20px;
+            
+            max-width: 600px;
             margin-bottom: 20px;
+            right: 25px;
+            left: 25px;
             border-radius: 10px;
-            width: 90%; /* Занимает 90% ширины экрана */
-            max-width: 600px; /* Максимальная ширина */
+            width: 100%; /* Занимает 90% ширины экрана */
+             /* Максимальная ширина */
             display: flex;
+            flex-wrap: wrap;
+            flex-shrink: 1;
+            box-sizing: border-box;
+
             align-items: center; /* Выравнивание по вертикали */
             justify-content: space-between; /* Распределяем пространство между элементами */
+            box-shadow:
+    /* Нижняя тень для глубины (темнее, дальше) */
+    20px 6px 22px rgba(106, 106, 106, 0.15),
+    /* Верхний светлый блик (светлее, ближе, внутри) */
+    inset 1px 10px 20px rgba(0, 0, 0, 0.6);
         }
 
         .top-section img {
             max-width: 100px; /* Размер картинки слева */
             height: auto;
+                        flex-wrap: wrap;
+
             margin-right: 20px;
             border-radius: 5px;
         }
 
         .top-buttons {
             display: flex;
+                        flex-wrap: wrap;
+
             flex-direction: column; /* Кнопки в столбик */
         }
 
         .bottom-section {
-            padding: 20px;
-            width: 90%;
+            padding-top: 20px;
+            width: 100%;
             max-width: 600px;
+            
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-around; /* Равномерное распределение кнопок */
+            gap: 15px;
+            flex-shrink: 1;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+.flex-container .button1 { order: 1; }
+.flex-container .button2 { order: 2; }
+.flex-container .button3 { order: 3; }
+.flex-container .button4 { order: 4; }
+
+        .bottom-section-button{
+            max-width: 300px;
+            min-width: 150px;
+            height: 80px;
+            border-radius: 15px;
+            border: 0.1px solid #3b2d3d;
+             box-shadow:
+    /* Нижняя тень для глубины (темнее, дальше) */
+    20px 6px 12px rgba(0, 0, 0, 0.15),
+    /* Верхний светлый блик (светлее, ближе, внутри) */
+    inset 0 2px 0px rgba(255, 255, 255, 0.6);
+            padding-bottom: 50px;
+            text-align: justify;
+            padding-left: 5px;
+            margin: 0;
+        }
+
+        .bottom-section-menu {
+            margin: 0;
+            padding: 0;
         }
 
         /* Дополнительные стили для телеграм-мини-приложения */
@@ -105,10 +164,10 @@
 
     <!-- Нижний блок с кнопками -->
     <div class="bottom-section">
-        <button onclick="location.href='menu.html'">Меню</button>
-        <button onclick="location.href='tea.html'">Чайная карта</button>
-        <button onclick="location.href='parkour.html'">Паркур</button>
-        <button onclick="location.href='bar_map.html'">Карта бара</button>
+        <button class="bottom-section-button" onclick="location.href='menu.html'">Меню</button>
+        <button class="bottom-section-button" onclick="location.href='tea.html'">Чайная карта</button>
+        <button class="bottom-section-button" onclick="location.href='parkour.html'">Паркур</button>
+        <button class="bottom-section-button" onclick="location.href='bar_map.html'">Карта бара</button>
     </div>
 
     <!-- Подключаем официальный скрипт Telegram Web App API -->

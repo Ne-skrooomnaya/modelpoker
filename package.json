@@ -4,7 +4,7 @@
   "description": "Мой Telegram бот с мини-приложением для Amvera.ru",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js"
+    "start": "server/main.js"
   },
   "keywords": [],
   "author": "Твое Имя",

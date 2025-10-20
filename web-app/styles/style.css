@@ -73,6 +73,7 @@ body {
 
 .top-section-img {
     height: 200px;
+    max-width: 200px;
     padding-left: 30px;
 }
 

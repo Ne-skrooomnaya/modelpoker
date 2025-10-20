@@ -85,6 +85,9 @@ body {
     .top-section-img {
         padding-left: 5px;
     }
+    .top-section {
+        padding: 0px;
+    }
 }
 
 
